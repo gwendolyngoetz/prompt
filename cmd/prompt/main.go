@@ -45,23 +45,23 @@ func buildPrompt() string {
 		prompt.
 			AddPart(p.Part{FgColor: colorBlack, BgColor: colorPwd, Text: git.GetRepoName(), Icon: iconGit}).
 			AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: git.GetRepoRelativePath(), Separator: iconSeparator}).
-			AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Text: git.GetBranchName(), Icon: iconBranch})
-
-		gitChangesIcon := ""
-		if git.HasChanges() {
-			gitChangesIcon = iconGitChanges
-		}
-
-		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Icon: gitChangesIcon, Separator: iconSeparator})
+			AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Text: git.GetBranchName(), Icon: iconBranch}).
+			AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Icon: getChangesIcon(), Separator: iconSeparator})
 	} else {
-
-		currentDir := computer.GetPwd()
-		prompt.AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: currentDir, Icon: iconDirectory, Separator: iconSeparator})
+		prompt.AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: computer.GetPwd(), Icon: iconDirectory, Separator: iconSeparator})
 	}
 
 	prompt.AddPart(p.Part{Icon: "\n" + iconPrompt})
 
 	return prompt.Build()
+}
+
+func getChangesIcon() string {
+	if git.HasChanges() {
+		return iconGitChanges
+	}
+
+	return ""
 }
 
 func main() {
