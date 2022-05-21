@@ -6,7 +6,7 @@ clean:
 	@rm -rf build
 	@echo Cleaned build directory
 	
-install:
+install: uninstall
 	@[ -d $${HOME}/.local/bin ] || @mkdir -p $${HOME}/.local/bin
 	@cp build/prompt $${HOME}/.local/bin
 	@echo Installed prompt
