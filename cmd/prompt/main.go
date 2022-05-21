@@ -25,7 +25,7 @@ var (
 	iconBranch     = ""
 	iconGitChanges = ""
 	iconDirectory  = "ﱮ"
-	iconPrompt     = "_"
+	iconPrompt     = ""
 )
 
 func buildPrompt() string {
