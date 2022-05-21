@@ -1,11 +1,11 @@
 package computer
 
 import (
+    "fmt"
 	"log"
 	"os"
 	"os/exec"
 	"os/user"
-	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
@@ -15,7 +15,7 @@ import (
 
 func GetUserName() string {
 	user, err := user.Current()
-
+fmt.Print(user.Username)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -111,16 +111,11 @@ func IsNarrowWindow() bool {
 }
 
 func IsRemote() bool {
-	value, err := exec.Command("who", "am", "i").Output()
-
-	if err != nil {
-		log.Fatalf(err.Error())
+	if _, ok := os.LookupEnv("SSH_CLIENT"); ok {
+		return true
 	}
 
-	match, _ := regexp.MatchString("\\([-a-zA-Z0-9\\.]+\\)$", string(value))
-
-	return match
-	// return true
+	return false
 }
 
 func IsSudo() bool {
