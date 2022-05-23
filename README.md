@@ -26,7 +26,7 @@ In addition a [Nerd Font](https://www.nerdfonts.com) needs to be installed on th
 ### Install
 ```bash
 make
-make installl
+make install
 ```
 
 
