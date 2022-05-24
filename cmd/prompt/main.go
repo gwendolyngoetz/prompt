@@ -24,7 +24,7 @@ var (
 	iconGit        = ""
 	iconBranch     = ""
 	iconGitChanges = ""
-	iconDirectory  = "ﱮ"
+	iconDirectory  = ""
 	iconPrompt     = ""
 )
 
