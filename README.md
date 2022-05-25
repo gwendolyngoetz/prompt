@@ -13,6 +13,8 @@
 * MacOS Monterey
   * Alacritty
   * iTerm2 
+* Windows 10
+  * Windows Terminal 
 
 ## Build and Install
 

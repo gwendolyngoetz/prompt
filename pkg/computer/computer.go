@@ -42,6 +42,8 @@ func GetOsIcon() string {
 		distro = "osx"
 	case "linux":
 		distro = readOSRelease()["ID"]
+	case "windows":
+		distro = "windows"
 	}
 
 	result := ""
@@ -63,6 +65,8 @@ func GetOsIcon() string {
 		result = ""
 	case "linux":
 		result = ""
+	case "windows":
+		result = ""
 	default:
 		result = ""
 	}
