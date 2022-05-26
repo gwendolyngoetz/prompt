@@ -68,4 +68,3 @@ cls
 [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
 
 ```
-
