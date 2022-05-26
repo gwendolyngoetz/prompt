@@ -1,6 +1,6 @@
-# README
-
 [![Makefile CI](https://github.com/gwendolyngoetz/prompt/actions/workflows/makefile.yml/badge.svg?branch=master)](https://github.com/gwendolyngoetz/prompt/actions/workflows/makefile.yml)
+
+# README
 
 ## Example
 
