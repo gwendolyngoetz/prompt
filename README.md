@@ -25,7 +25,7 @@
 * go
 * make
 
-In addition a <a href="https://www.nerdfonts.com" target="_blank">Nerd Font</a> needs to be installed on the system for icons to display. The Cousine Nerd Font is used in the sample image.
+In addition a [Nerd Font](https://www.nerdfonts.com) needs to be installed on the system for icons to display. The Cousine Nerd Font is used in the sample image.
 
 ### Install
 ```bash
