@@ -57,7 +57,7 @@ func buildPrompt() string {
 }
 
 func getChangesIcon() string {
-	if git.HasChanges() {
+	if git.HasStatusChanges() {
 		return iconGitChanges
 	}
 
