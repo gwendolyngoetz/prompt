@@ -5,6 +5,7 @@ import (
 	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
 	p "gwendolyngoetz/prompt/pkg/prompt"
+	"os"
 )
 
 var (
@@ -28,7 +29,7 @@ var (
 	iconPrompt     = ""
 )
 
-func buildPrompt() string {
+func buildPrompt(showHostname bool) string {
 	builder := p.PromptBuilder{}
 
 	prompt := builder.AddPart(p.Part{FgColor: colorBlack, BgColor: colorOs, Icon: computer.GetOsIcon(), Separator: iconSeparator})
@@ -38,7 +39,13 @@ func buildPrompt() string {
 	}
 
 	if computer.IsRemote() {
-		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorHostname, Icon: iconRemote, Separator: iconSeparator})
+		hostnameText := ""
+
+		if showHostname {
+			hostnameText = computer.GetHostname()
+		}
+
+		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorHostname, Text: hostnameText, Icon: iconRemote, Separator: iconSeparator})
 	}
 
 	if git.IsRepo() {
@@ -65,6 +72,12 @@ func getChangesIcon() string {
 }
 
 func main() {
-	promptString := buildPrompt()
+	showHostname := false
+
+	if len(os.Args) > 1 && os.Args[1] == "--showHostname" {
+		showHostname = true
+	}
+
+	promptString := buildPrompt(showHostname)
 	fmt.Println(promptString)
 }
