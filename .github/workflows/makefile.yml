@@ -20,4 +20,6 @@ jobs:
     
     - name: Install dependencies
       run: make
-      
+     
+    - name: Package deb file
+      run: VERSION=1.0.0 make package-deb
