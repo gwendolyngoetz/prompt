@@ -1,11 +1,11 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
 	p "gwendolyngoetz/prompt/pkg/prompt"
-	"os"
 )
 
 var (
@@ -28,6 +28,8 @@ var (
 	iconDirectory  = ""
 	iconPrompt     = ""
 )
+
+var Version = "development"
 
 func buildPrompt(showHostname bool) string {
 	builder := p.PromptBuilder{}
@@ -72,12 +74,15 @@ func getChangesIcon() string {
 }
 
 func main() {
-	showHostname := false
+    showVersion := flag.Bool("version", false, "Show version")
+    showHostname := flag.Bool("showHostname", false, "Show Hostname")
+	flag.Parse()
 
-	if len(os.Args) > 1 && os.Args[1] == "--showHostname" {
-		showHostname = true
+	if *showVersion {
+		fmt.Println(Version)
+		return
 	}
 
-	promptString := buildPrompt(showHostname)
+	promptString := buildPrompt(*showHostname)
 	fmt.Println(promptString)
 }
