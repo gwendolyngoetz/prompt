@@ -1,8 +1,8 @@
 build: clean
 ifeq ($(OS),Windows_NT)
-	@go build -o .\build\promptwin.exe .\cmd\prompt\main.go
+	@go build -ldflags="-X 'main.Version=v$(VERSION)'" -o .\build\promptwin.exe .\cmd\prompt\main.go
 else
-	@go build -o build/prompt cmd/prompt/main.go
+	@go build -ldflags="-X 'main.Version=v$(VERSION)'" -o build/prompt cmd/prompt/main.go
 endif
 	@echo Built prompt
 
@@ -32,7 +32,29 @@ else
 endif
 	@echo Uninstalled prompt
 
+define newline
 
 
+endef
 
- 
+define CONTROL_FILE_BODY
+Package: prompt
+Version: $(VERSION)
+Section: base
+Priority: optional
+Architecture: x64
+Maintainer: Gwendolyn Goetz
+Description: Fancy prompt output
+endef
+
+package-deb:
+	@mkdir -p ./package/prompt_$(VERSION)/tmp/usr/local/bin
+	@mkdir -p ./package/prompt_$(VERSION)/DEBIAN
+
+	@cp ./build/prompt ./package/prompt_$(VERSION)/tmp/usr/local/bin
+	@touch ./package/prompt_$(VERSION)/DEBIAN/control
+	
+	@echo '$(subst $(newline),\n,${CONTROL_FILE_BODY})' > ./package/prompt_$(VERSION)/DEBIAN/control
+
+	@dpkg-deb --build ./package/prompt_$(VERSION)
+	@echo Package deb
