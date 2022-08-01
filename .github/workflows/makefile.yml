@@ -45,8 +45,8 @@ jobs:
     - name: Install dependencies
       run: make
      
-    - name: Package deb file
-      run: "VERSION=${{ env.ver_num }} make package-deb"
+    #- name: Package exe file
+    #  run: "VERSION=${{ env.ver_num }} make package-exe"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
