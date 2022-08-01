@@ -34,3 +34,10 @@ jobs:
         path: package
         if-no-files-found: error
         retention-days: 90
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1.10.0
+      with:
+        artifactErrorsFailBuild: true
+        artifact: "prompt_${{ env.ver_num }}.deb"
+        draft: false
