@@ -42,3 +42,4 @@ jobs:
         artifacts: "package/prompt_${{ env.ver_num }}.deb"
         commit: "${{github.sha}}"
         draft: false
+        name: "prompt_${{ env.ver_num }}.deb"
