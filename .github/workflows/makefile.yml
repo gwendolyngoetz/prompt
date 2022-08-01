@@ -23,14 +23,15 @@ jobs:
       run: make
      
     - name: Package deb file
-      run: VERSION=1.0.0 make package-deb
+      run: VERSION=1.0.${{ github.run_number }} make package-deb
 
-    - name: Output Run ID
-      run: echo ${{ github.run_id }}
-      
     - name: Output Run Number
-      run: echo ${{ github.run_number }}
-      
-    - name: Output Run Attempt
-      run: echo ${{ github.run_attempt }}
-      
+      run: echo 1.0.${{ github.run_number }}
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        #name: prompt
+        #path: artifacts
+        if-no-files-found: error
+        retention-days: 90
