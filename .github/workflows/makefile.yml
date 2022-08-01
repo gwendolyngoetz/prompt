@@ -38,8 +38,5 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1.10.0
       with:
-        artifactErrorsFailBuild: true
         artifacts: "package/prompt_${{ env.ver_num }}.deb"
-        commit: "${{github.sha}}"
-        draft: false
-        name: "prompt_${{ env.ver_num }}.deb"
+        token: ${{ github.token }}
