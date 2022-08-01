@@ -10,13 +10,13 @@ on:
     branches: [ master ]
     paths-ignore:
       - '**.md'
-      
+env:
+  ver_num: "1.0.${{ github.run_number }}"
+            
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
-    env:
-      ver_num: "1.0.${{ github.run_number }}"
-      
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -34,14 +34,40 @@ jobs:
         path: "package/prompt_${{ env.ver_num }}.deb"
         if-no-files-found: error
         retention-days: 90
+        
+  build-windows:
+    runs-on: windows-latest
 
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+        
+    - name: Install dependencies
+      run: make
+     
+    - name: Package deb file
+      run: "VERSION=${{ env.ver_num }} make package-deb"
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: "promptwin_${{ env.ver_num }}.exe"
+        path: "package/promptwin_${{ env.ver_num }}.exe"
+        if-no-files-found: error
+        retention-days: 90
+
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Create Release
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifacts: "package/prompt_${{ env.ver_num }}.deb"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb,package/promptwin_${{ env.ver_num }}.exe"
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}"
         name: "v${{ env.ver_num }}"
         token: ${{ github.token }}
+
