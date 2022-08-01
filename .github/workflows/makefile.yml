@@ -39,7 +39,7 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifacts: "package/prompt_${{ env.ver_num }}.deb,package/promptwin_${{ env.ver_num }}.exe"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb,build/promptwin_${{ env.ver_num }}.exe"
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}"
