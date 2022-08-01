@@ -43,5 +43,5 @@ jobs:
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}.deb"
-        name: "prompt_${{ env.ver_num }}.deb"
+        name: "v${{ env.ver_num }}.deb"
         token: ${{ github.token }}
