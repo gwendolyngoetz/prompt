@@ -42,6 +42,6 @@ jobs:
         artifacts: "package/prompt_${{ env.ver_num }}.deb"
         commit: "${{ github.sha }}"
         #draft: false
-        tag: "v${{ env.ver_num }}.deb"
-        name: "v${{ env.ver_num }}.deb"
+        tag: "v${{ env.ver_num }}"
+        name: "v${{ env.ver_num }}"
         token: ${{ github.token }}
