@@ -14,7 +14,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      VERSION: 1.0.${{ github.run_number }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -23,15 +24,12 @@ jobs:
       run: make
      
     - name: Package deb file
-      run: VERSION=1.0.${{ github.run_number }} make package-deb
-
-    - name: Output Run Number
-      run: echo 1.0.${{ github.run_number }}
+      run: VERSION=$VERSION make package-deb
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: prompt_1.0.${{ github.run_number }}.deb
+        name: prompt_$VERSION.deb
         path: package
         if-no-files-found: error
         retention-days: 90
