@@ -30,8 +30,8 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: "prompt_${{ env.ver_num }}.deb"
-        path: package
+        name: "package/prompt_${{ env.ver_num }}.deb"
+        #path: package
         if-no-files-found: error
         retention-days: 90
 
@@ -39,5 +39,5 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifact: "prompt_${{ env.ver_num }}.deb"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb"
         draft: false
