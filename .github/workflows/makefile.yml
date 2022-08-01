@@ -25,12 +25,12 @@ jobs:
       run: make
      
     - name: Package deb file
-      run: "VERSION=$ver_num make package-deb"
+      run: "VERSION=${{ env.ver_num }} make package-deb"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: "prompt_${{ ver_num }}.deb"
+        name: "prompt_${{ env.ver_num }}.deb"
         path: package
         if-no-files-found: error
         retention-days: 90
