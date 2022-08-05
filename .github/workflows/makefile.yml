@@ -34,9 +34,6 @@ jobs:
         path: "package/prompt_${{ env.ver_num }}.deb"
         if-no-files-found: error
         retention-days: 90
-        
-    - name: show files
-      run: "ls -la build; ls -la package"
 
     - name: Upload a Build Artifact - exe
       uses: actions/upload-artifact@v3.1.0
@@ -50,7 +47,7 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifacts: "package/prompt_${{ env.ver_num }}.deb,build/promptwin_${{ env.ver_num }}.exe"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb,promptwin_${{ env.ver_num }}.exe"
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}"
