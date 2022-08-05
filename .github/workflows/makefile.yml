@@ -25,7 +25,7 @@ jobs:
       run: "VERSION=${{ env.ver_num }} make"
      
     - name: Package deb file
-      run: "VERSION=${{ env.ver_num }} make package-deb"
+      run: "VERSION=${{ env.ver_num }} make package"
 
     - name: Upload a Build Artifact - deb
       uses: actions/upload-artifact@v3.1.0
