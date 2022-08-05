@@ -61,7 +61,7 @@ package-deb:
 	@echo Package deb
 
 package-zip:
-	@zip -j package/prompt_${VERSION}.zip build/promptwin.exe
+	@zip -j package/prompt_$(VERSION).zip build/promptwin.exe
 	@echo Package zip
 
 package: package-deb package-zip
