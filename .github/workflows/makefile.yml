@@ -21,8 +21,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
         
-    - name: Install dependencies
-      run: make
+    - name: Run Make
+      run: "VERSION=${{ env.ver_num }} make"
      
     - name: Package deb file
       run: "VERSION=${{ env.ver_num }} make package-deb"
@@ -34,7 +34,6 @@ jobs:
         path: "package/prompt_${{ env.ver_num }}.deb"
         if-no-files-found: error
         retention-days: 90
-
 
     - name: Upload a Build Artifact - exe
       uses: actions/upload-artifact@v3.1.0
