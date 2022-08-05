@@ -35,11 +35,11 @@ jobs:
         if-no-files-found: error
         retention-days: 90
 
-    - name: Upload a Build Artifact - exe
+    - name: Upload a Build Artifact - zip
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: "promptwin_${{ env.ver_num }}.exe"
-        path: "build/promptwin.exe"
+        name: "promptwin_${{ env.ver_num }}.zip"
+        path: "build/promptwin.zip"
         if-no-files-found: error
         retention-days: 90
 
@@ -47,7 +47,7 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifacts: "package/prompt_${{ env.ver_num }}.deb,promptwin_${{ env.ver_num }}.exe"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb,promptwin_${{ env.ver_num }}.zip"
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}"
