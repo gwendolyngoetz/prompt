@@ -39,7 +39,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
         name: "promptwin_${{ env.ver_num }}.zip"
-        path: "package/promptwin_${{ env.ver_num }}.zip"
+        path: "package/prompt_${{ env.ver_num }}.zip"
         if-no-files-found: error
         retention-days: 90
 
@@ -47,7 +47,7 @@ jobs:
       uses: ncipollo/release-action@v1.10.0
       with:
         artifactErrorsFailBuild: true
-        artifacts: "package/prompt_${{ env.ver_num }}.deb,package/promptwin_${{ env.ver_num }}.zip"
+        artifacts: "package/prompt_${{ env.ver_num }}.deb,package/prompt_${{ env.ver_num }}.zip"
         commit: "${{ github.sha }}"
         #draft: false
         tag: "v${{ env.ver_num }}"
