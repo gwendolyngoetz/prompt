@@ -34,6 +34,9 @@ jobs:
         path: "package/prompt_${{ env.ver_num }}.deb"
         if-no-files-found: error
         retention-days: 90
+        
+    - name: show files
+      run: "ls -la"
 
     - name: Upload a Build Artifact - exe
       uses: actions/upload-artifact@v3.1.0
