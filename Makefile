@@ -59,3 +59,9 @@ package-deb:
 
 	@dpkg-deb --build ./package/prompt_$(VERSION)
 	@echo Package deb
+
+package-zip:
+	@zip -j package/prompt_${VERSION}.zip build/promptwin.exe
+	@echo Package zip
+
+package: package-deb package-zip
