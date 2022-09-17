@@ -10,7 +10,7 @@
 
 ### Tested on
 
-* Ubuntu 20.10
+* Ubuntu 20.10, 22.04
   * Alacritty
 * MacOS Monterey
   * Alacritty
