@@ -54,7 +54,7 @@ Add to `$env:UserProfile\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 ```powershell
 function prompt {
     if (Test-Path -Path "$env:LocalAppData\prompt\promptwin.exe" -PathType Leaf) {
-        # Only displaying the first line by defailt so forcing it
+        # Only displaying the first line by default so forcing it
         $a = invoke-expression "$env:LocalAppData\prompt\promptwin.exe"
         $a[0] + "`r`n" + $a[1]
     }
