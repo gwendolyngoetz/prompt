@@ -6,17 +6,21 @@
 
 ![image](https://user-images.githubusercontent.com/195162/169644884-2200e447-7510-44c1-8106-6faa3f35dfe8.png)
 
-## Notes
+## Tested on
 
-### Tested on
-
+### OS
 * Ubuntu 20.10, 22.04
-  * Alacritty
 * MacOS Monterey
-  * Alacritty
-  * iTerm2 
 * Windows 10
-  * Windows Terminal 
+
+### Shell
+* Bash
+* PowerShell
+
+### Terminal
+* Alacritty
+* iTerm2
+* Windows Terminal
 
 ## Build and Install
 
