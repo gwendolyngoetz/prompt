@@ -44,7 +44,7 @@ jobs:
         retention-days: 90
 
     - name: Create Release
-      uses: ncipollo/release-action@v1.11.0
+      uses: ncipollo/release-action@v1.11.1
       with:
         artifactErrorsFailBuild: true
         artifacts: "package/prompt_${{ env.ver_num }}.deb,package/prompt_${{ env.ver_num }}.zip"
