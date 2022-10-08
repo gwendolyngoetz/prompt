@@ -13,7 +13,7 @@ func TestGetUserName(t *testing.T) {
 
 func TestGetHostname(t *testing.T) {
 	got := GetHostname()
-	want := "thalia"
+	want := "hestia"
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
@@ -22,7 +22,7 @@ func TestGetHostname(t *testing.T) {
 
 func TestGetOsIcon(t *testing.T) {
 	got := GetOsIcon()
-	want := ""
+	want := ""
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
