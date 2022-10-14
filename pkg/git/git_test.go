@@ -22,7 +22,7 @@ func TestGetRepoName(t *testing.T) {
 
 func TestGetRepoRelativePath(t *testing.T) {
 	got := GetRepoRelativePath()
-	want := "pkg/git"
+	want := ":pkg/git"
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
@@ -40,7 +40,7 @@ func TestHasStatusChanges(t *testing.T) {
 
 func TestHasStashes(t *testing.T) {
 	got := HasStashes()
-	want := true
+	want := false
 
 	if got != want {
 		t.Errorf("got %t want %t", got, want)

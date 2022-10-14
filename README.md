@@ -6,17 +6,21 @@
 
 ![image](https://user-images.githubusercontent.com/195162/169644884-2200e447-7510-44c1-8106-6faa3f35dfe8.png)
 
-## Notes
+## Tested on
 
-### Tested on
-
-* Ubuntu 20.10
-  * Alacritty
+### OS
+* Ubuntu 20.10, 22.04
 * MacOS Monterey
-  * Alacritty
-  * iTerm2 
 * Windows 10
-  * Windows Terminal 
+
+### Shell
+* Bash
+* PowerShell
+
+### Terminal
+* Alacritty
+* iTerm2
+* Windows Terminal
 
 ## Build and Install
 
@@ -54,7 +58,7 @@ Add to `$env:UserProfile\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 ```powershell
 function prompt {
     if (Test-Path -Path "$env:LocalAppData\prompt\promptwin.exe" -PathType Leaf) {
-        # Only displaying the first line by defailt so forcing it
+        # Only displaying the first line by default so forcing it
         $a = invoke-expression "$env:LocalAppData\prompt\promptwin.exe"
         $a[0] + "`r`n" + $a[1]
     }
