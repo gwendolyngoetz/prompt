@@ -74,8 +74,8 @@ func getChangesIcon() string {
 }
 
 func main() {
-    showVersion := flag.Bool("version", false, "Show version")
-    showHostname := flag.Bool("showHostname", false, "Show Hostname")
+	showVersion := flag.Bool("version", false, "Show version")
+	showHostname := flag.Bool("showHostname", false, "Show Hostname")
 	flag.Parse()
 
 	if *showVersion {

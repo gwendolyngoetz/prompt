@@ -1,7 +1,7 @@
 package computer
 
 import (
-    "fmt"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -15,7 +15,7 @@ import (
 
 func GetUserName() string {
 	user, err := user.Current()
-fmt.Print(user.Username)
+	fmt.Print(user.Username)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -26,7 +26,6 @@ fmt.Print(user.Username)
 func GetHostname() string {
 	// Built in os.Hostname() return fqdn
 	hostname, err := exec.Command("hostname", "-s").Output()
-
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -104,7 +103,6 @@ func GetPwd() string {
 
 func IsNarrowWindow() bool {
 	cols, err := exec.Command("tput", "cols").Output()
-
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

@@ -2,9 +2,7 @@ package color
 
 import "strings"
 
-var (
-	resetColor = "\033[0m"
-)
+var resetColor = "\033[0m"
 
 type ColorBuilder struct {
 	fgColor          string
