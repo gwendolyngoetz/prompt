@@ -8,6 +8,12 @@ import (
 	p "gwendolyngoetz/prompt/pkg/prompt"
 )
 
+type Config struct {
+	ShowVersion              bool
+	ShowHostname             bool
+	ShowPythonVirtualEnvText bool
+}
+
 var (
 	colorBlack    = "0,0,0"
 	colorWhite    = "224,224,224"
@@ -33,7 +39,7 @@ var (
 
 var Version = "development"
 
-func buildPrompt(showHostname bool, showPythonVirtualEnvText bool) string {
+func buildPrompt(config *Config) string {
 	builder := p.PromptBuilder{}
 
 	prompt := builder.AddPart(p.Part{FgColor: colorBlack, BgColor: colorOs, Icon: computer.GetOsIcon(), Separator: iconSeparator})
@@ -45,7 +51,7 @@ func buildPrompt(showHostname bool, showPythonVirtualEnvText bool) string {
 	if computer.IsRemote() {
 		hostnameText := ""
 
-		if showHostname {
+		if config.ShowHostname {
 			hostnameText = computer.GetHostname()
 		}
 
@@ -55,7 +61,7 @@ func buildPrompt(showHostname bool, showPythonVirtualEnvText bool) string {
 	if computer.IsPythonVirtualEnv() {
 		venvName := ""
 
-		if showPythonVirtualEnvText {
+		if config.ShowPythonVirtualEnvText {
 			venvName = computer.GetPythonVirtualEnv()
 		}
 
@@ -88,6 +94,7 @@ func getChangesIcon() string {
 func main() {
 	showVersion := flag.Bool("version", false, "Show version")
 	showHostname := flag.Bool("showHostname", false, "Show Hostname")
+	showPythonVirtualEnvText := flag.Bool("showPythonVirtualEnvText", false, "Show Python Virtual Env Text")
 	flag.Parse()
 
 	if *showVersion {
@@ -95,6 +102,11 @@ func main() {
 		return
 	}
 
-	promptString := buildPrompt(*showHostname, false)
+	config := Config{
+		ShowHostname:             *showHostname,
+		ShowPythonVirtualEnvText: *showPythonVirtualEnvText,
+	}
+
+	promptString := buildPrompt(&config)
 	fmt.Println(promptString)
 }
