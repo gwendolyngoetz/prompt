@@ -128,3 +128,20 @@ func IsSudo() bool {
 	return false
 	// return true
 }
+
+func IsPythonVirtualEnv() bool {
+	if _, ok := os.LookupEnv("VIRTUAL_ENV_PROMPT"); ok {
+		return true
+	}
+
+	return false
+}
+
+func GetPythonVirtualEnv() string {
+	if value, ok := os.LookupEnv("VIRTUAL_ENV_PROMPT"); ok {
+		replacer := strings.NewReplacer("(", "", ")", "")
+		return replacer.Replace(value)
+	}
+
+	return ""
+}

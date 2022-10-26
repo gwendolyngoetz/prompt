@@ -64,3 +64,21 @@ func TestIsSudo(t *testing.T) {
 		t.Errorf("got '%t' want '%t'", got, want)
 	}
 }
+
+func TestIsPythonVirtualEnv(t *testing.T) {
+	got := IsPythonVirtualEnv()
+	want := false
+
+	if got != want {
+		t.Errorf("got '%t' want '%t'", got, want)
+	}
+}
+
+func TestGetPythonVirtualEnv(t *testing.T) {
+	got := GetPythonVirtualEnv()
+	want := ""
+
+	if got != want {
+		t.Errorf("got '%s' want '%s'", got, want)
+	}
+}

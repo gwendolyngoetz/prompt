@@ -16,6 +16,7 @@ var (
 	colorHostname = "33,170,18"
 	colorPwd      = "90,85,154"
 	colorBranch   = "98,114,164"
+	colorPython   = "55,118,171"
 )
 
 var (
@@ -27,11 +28,12 @@ var (
 	iconGitChanges = ""
 	iconDirectory  = ""
 	iconPrompt     = ""
+	iconPython     = ""
 )
 
 var Version = "development"
 
-func buildPrompt(showHostname bool) string {
+func buildPrompt(showHostname bool, showPythonVirtualEnvText bool) string {
 	builder := p.PromptBuilder{}
 
 	prompt := builder.AddPart(p.Part{FgColor: colorBlack, BgColor: colorOs, Icon: computer.GetOsIcon(), Separator: iconSeparator})
@@ -48,6 +50,16 @@ func buildPrompt(showHostname bool) string {
 		}
 
 		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorHostname, Text: hostnameText, Icon: iconRemote, Separator: iconSeparator})
+	}
+
+	if computer.IsPythonVirtualEnv() {
+		venvName := ""
+
+		if showPythonVirtualEnvText {
+			venvName = computer.GetPythonVirtualEnv()
+		}
+
+		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorPython, Text: venvName, Icon: iconPython, Separator: iconSeparator})
 	}
 
 	if git.IsRepo() {
@@ -83,6 +95,6 @@ func main() {
 		return
 	}
 
-	promptString := buildPrompt(*showHostname)
+	promptString := buildPrompt(*showHostname, false)
 	fmt.Println(promptString)
 }
