@@ -9,9 +9,9 @@ import (
 )
 
 type Config struct {
-	ShowVersion              bool
-	ShowHostname             bool
-	ShowPythonVirtualEnvText bool
+	ShowVersion        bool
+	ShowHostname       bool
+	ShowPythonVEnvName bool
 }
 
 var (
@@ -61,7 +61,7 @@ func buildPrompt(config *Config) string {
 	if computer.IsPythonVirtualEnv() {
 		venvName := ""
 
-		if config.ShowPythonVirtualEnvText {
+		if config.ShowPythonVEnvName {
 			venvName = computer.GetPythonVirtualEnv()
 		}
 
@@ -91,22 +91,24 @@ func getChangesIcon() string {
 	return ""
 }
 
-func main() {
-	showVersion := flag.Bool("version", false, "Show version")
-	showHostname := flag.Bool("showHostname", false, "Show Hostname")
-	showPythonVirtualEnvText := flag.Bool("showPythonVirtualEnvText", false, "Show Python Virtual Env Text")
+func loadConfig() *Config {
+	config := Config{}
+	flag.BoolVar(&config.ShowVersion, "version", false, "Show version")
+	flag.BoolVar(&config.ShowHostname, "showHostname", false, "Show Hostname")
+	flag.BoolVar(&config.ShowPythonVEnvName, "showPythonVEnvName", false, "Show Python Virtual Env Name")
 	flag.Parse()
 
-	if *showVersion {
+	return &config
+}
+
+func main() {
+	config := loadConfig()
+
+	if config.ShowVersion {
 		fmt.Println(Version)
 		return
 	}
 
-	config := Config{
-		ShowHostname:             *showHostname,
-		ShowPythonVirtualEnvText: *showPythonVirtualEnvText,
-	}
-
-	promptString := buildPrompt(&config)
+	promptString := buildPrompt(config)
 	fmt.Println(promptString)
 }
