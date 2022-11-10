@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -17,6 +18,18 @@ func IsRepo() bool {
 	}
 
 	return true
+}
+
+func IsBareRepository() bool {
+	out, _ := exec.Command(
+		"git",
+		"rev-parse",
+		"--is-bare-repository").
+		Output()
+
+	result := strings.TrimSpace(string(out))
+	resultB, _ := strconv.ParseBool(result)
+	return resultB
 }
 
 func GetRepoName() string {
