@@ -43,7 +43,7 @@ Package: prompt
 Version: $(VERSION)
 Section: base
 Priority: optional
-Architecture: x64
+Architecture: amd64
 Maintainer: Gwendolyn Goetz
 Description: Fancy prompt output
 endef
