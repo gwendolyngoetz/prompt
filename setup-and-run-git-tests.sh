@@ -6,6 +6,8 @@ ROOT_FOLDER="/tmp/testing"
 PROMPT_FOLDER="${ROOT_FOLDER}/prompt"
 PROMPT_WT_FOLDER="${ROOT_FOLDER}/prompt_wt"
 
+mkdir -p ${ROOT_FOLDER}
+
 # Compile git tests
 cd pkg/git
 go test -c
