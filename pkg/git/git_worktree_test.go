@@ -2,7 +2,7 @@ package git
 
 import "testing"
 
-func TestIsRepo(t *testing.T) {
+func TestWtIsRepo(t *testing.T) {
 	got := IsRepo()
 	want := true
 
@@ -11,7 +11,7 @@ func TestIsRepo(t *testing.T) {
 	}
 }
 
-func TestGetRepoName(t *testing.T) {
+func TestWtGetRepoName(t *testing.T) {
 	got := GetRepoName()
 	want := "prompt"
 
@@ -20,7 +20,7 @@ func TestGetRepoName(t *testing.T) {
 	}
 }
 
-func TestGetRepoRelativePath(t *testing.T) {
+func TestWtGetRepoRelativePath(t *testing.T) {
 	got := GetRepoRelativePath()
 	want := ":pkg/git"
 
@@ -29,7 +29,7 @@ func TestGetRepoRelativePath(t *testing.T) {
 	}
 }
 
-func TestHasStatusChanges(t *testing.T) {
+func TestWtHasStatusChanges(t *testing.T) {
 	got := HasStatusChanges()
 	want := true
 
@@ -38,7 +38,7 @@ func TestHasStatusChanges(t *testing.T) {
 	}
 }
 
-func TestHasStashes(t *testing.T) {
+func TestWtHasStashes(t *testing.T) {
 	got := HasStashes()
 	want := true
 
@@ -47,7 +47,7 @@ func TestHasStashes(t *testing.T) {
 	}
 }
 
-func TestHasChanges(t *testing.T) {
+func TestWtHasChanges(t *testing.T) {
 	got := HasChanges()
 	want := true
 
@@ -56,7 +56,7 @@ func TestHasChanges(t *testing.T) {
 	}
 }
 
-func TestGetBranchName(t *testing.T) {
+func TestWtGetBranchName(t *testing.T) {
 	got := GetBranchName()
 	want := "master"
 
