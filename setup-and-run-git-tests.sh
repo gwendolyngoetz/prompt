@@ -10,8 +10,10 @@ mkdir -p ${ROOT_FOLDER}
 
 # Compile git tests
 cd pkg/git
-go test -c
-mv git.test ${ROOT_FOLDER}
+go test -c git.go git_test.go -o git_folder.test
+go test -c git.go git_worktree_test.go -o git_worktree_folder.test
+mv git_folder.test ${ROOT_FOLDER}
+mv git_worktree_folder.test ${ROOT_FOLDER}
 
 # Clean
 rm -rf ${PROMPT_FOLDER}
@@ -66,8 +68,8 @@ git add ${FILE4}
 git stash push ${FILE4} -m "Adding ${FILE4}"
 
 # Copy git.test
-cp ${ROOT_FOLDER}/git.test ${PROMPT_FOLDER}/pkg/git
-cp ${ROOT_FOLDER}/git.test ${PROMPT_WT_FOLDER}/master/pkg/git
+cp ${ROOT_FOLDER}/git_folder.test ${PROMPT_FOLDER}/pkg/git
+cp ${ROOT_FOLDER}/git_worktree_folder.test ${PROMPT_WT_FOLDER}/master/pkg/git
 
 # Clear 
 if [[ -z "${DEBUG}" ]]; then
@@ -77,9 +79,9 @@ fi
 # Run git.test
 echo "PROMPT FOLDER"
 cd ${PROMPT_FOLDER}/pkg/git
-./git.test
+./git_folder.test
 
 echo "PROMPT WORKTREE FOLDER"
 cd ${PROMPT_WT_FOLDER}/master/pkg/git
-./git.test
+./git_worktree_folder.test
 
