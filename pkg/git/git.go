@@ -32,6 +32,18 @@ func IsBareRepository() bool {
 	return resultB
 }
 
+func IsInWorkTree() bool {
+	out, _ := exec.Command(
+		"git",
+		"rev-parse",
+		"--is-inside-work-tree").
+		Output()
+
+	result := strings.TrimSpace(string(out))
+	resultB, _ := strconv.ParseBool(result)
+	return resultB
+}
+
 func GetRepoName() string {
 	out, _ := exec.Command(
 		"git",
