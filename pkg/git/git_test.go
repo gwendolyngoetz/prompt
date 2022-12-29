@@ -40,7 +40,7 @@ func TestHasStatusChanges(t *testing.T) {
 
 func TestHasStashes(t *testing.T) {
 	got := HasStashes()
-	want := false
+	want := true
 
 	if got != want {
 		t.Errorf("got %t want %t", got, want)
