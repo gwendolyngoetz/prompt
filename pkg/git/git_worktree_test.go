@@ -11,12 +11,30 @@ func TestWtIsRepo(t *testing.T) {
 	}
 }
 
+func TestWtIsInWorkTree(t *testing.T) {
+	got := IsInWorkTree()
+	want := true
+
+	if got != want {
+		t.Errorf("failed")
+	}
+}
+
 func TestWtGetRepoName(t *testing.T) {
 	got := GetRepoName()
-	want := "prompt"
+	want := "prompt_wt"
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
+	}
+}
+
+func TestWtGetCloneType(t *testing.T) {
+	got := GetCloneType()
+	want := BareWorkTree
+
+	if got != want {
+		t.Errorf("got '%v' want '%v'", got, want)
 	}
 }
 

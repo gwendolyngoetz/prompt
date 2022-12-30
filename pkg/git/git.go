@@ -8,6 +8,14 @@ import (
 	"strings"
 )
 
+type CloneType int
+
+const (
+	NoWorkTree CloneType = iota
+	NonBareWorkTree
+	BareWorkTree
+)
+
 func IsRepo() bool {
 	_, err := exec.Command("git", "rev-parse", "--git-dir").Output()
 
@@ -15,6 +23,12 @@ func IsRepo() bool {
 		if s := werr.Error(); s != "0" {
 			return false
 		}
+	}
+
+	isBareRepo := IsBareRepository()
+
+	if isBareRepo {
+		return false
 	}
 
 	return true
@@ -45,6 +59,20 @@ func IsInWorkTree() bool {
 }
 
 func GetRepoName() string {
+	cloneType := GetCloneType()
+
+	if cloneType == NonBareWorkTree {
+		return GetAbsoluteDir()
+	}
+
+	if cloneType == BareWorkTree {
+		return GetCommonDir()
+	}
+
+	return ""
+}
+
+func GetAbsoluteDir() string {
 	out, _ := exec.Command(
 		"git",
 		"rev-parse",
@@ -58,7 +86,68 @@ func GetRepoName() string {
 	return strings.TrimSpace(result)
 }
 
+func GetCommonDir() string {
+	out, _ := exec.Command(
+		"git",
+		"rev-parse",
+		"--git-common-dir").
+		Output()
+
+	result := strings.TrimSpace(string(out))
+	// result = filepath.Dir(result)
+	result = filepath.Base(result)
+
+	return strings.TrimSpace(result)
+}
+
+func getTopLevel() string {
+	out, _ := exec.Command(
+		"git",
+		"rev-parse",
+		"--show-toplevel").
+		Output()
+
+	return strings.TrimSpace(string(out))
+}
+
+func GetCloneType() CloneType {
+	topLevel := getTopLevel()
+
+	_, err := os.Stat(topLevel)
+	if err != nil {
+		return NoWorkTree
+	}
+
+	info, err := os.Stat(topLevel + "/.git")
+	if err != nil {
+		return NoWorkTree
+	}
+
+	if info.IsDir() {
+		return NonBareWorkTree
+	}
+
+	return BareWorkTree
+}
+
 func GetRepoRelativePath() string {
+	out, _ := exec.Command(
+		"git",
+		"rev-parse",
+		"--show-prefix").
+		Output()
+
+	result := strings.TrimSpace(string(out))
+	result = strings.TrimSuffix(result, "/")
+
+	if len(result) > 0 {
+		result = ":" + result
+	}
+
+	return result
+}
+
+func GetRepoRelativePath1() string {
 	out, _ := exec.Command(
 		"git",
 		"rev-parse",

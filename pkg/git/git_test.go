@@ -11,12 +11,30 @@ func TestIsRepo(t *testing.T) {
 	}
 }
 
+func TestIsInWorkTree(t *testing.T) {
+	got := IsInWorkTree()
+	want := true
+
+	if got != want {
+		t.Errorf("failed")
+	}
+}
+
 func TestGetRepoName(t *testing.T) {
 	got := GetRepoName()
 	want := "prompt"
 
 	if got != want {
 		t.Errorf("got '%s' want '%s'", got, want)
+	}
+}
+
+func TestGetCloneType(t *testing.T) {
+	got := GetCloneType()
+	want := NonBareWorkTree
+
+	if got != want {
+		t.Errorf("got '%v' want '%v'", got, want)
 	}
 }
 
