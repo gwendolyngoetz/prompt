@@ -29,7 +29,7 @@
 * go
 * make
 
-In addition a [Nerd Font](https://www.nerdfonts.com) needs to be installed on the system for icons to display. The Cousine Nerd Font is used in the sample image.
+In addition a [Nerd Font](https://www.nerdfonts.com) needs to be installed on the system for icons to display. The [Cousine Nerd Font](https://www.programmingfonts.org/#cousine) is used in the sample image.
 
 ### Install
 ```bash
