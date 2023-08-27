@@ -29,7 +29,7 @@ uninstall:
 ifeq ($(OS),Windows_NT)
 	@if exist "%LOCALAPPDATA%\prompt" rmdir "%LOCALAPPDATA%\prompt" /s /q 
 else
-	@rm $${HOME}/.local/bin/prompt
+	@rm -f $${HOME}/.local/bin/prompt
 endif
 	@echo Uninstalled prompt
 
