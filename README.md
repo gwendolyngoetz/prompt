@@ -9,29 +9,37 @@
 ## Tested on
 
 ### OS
-* Ubuntu 20.10, 22.04
-* MacOS Monterey
-* Windows 10
+
+- Ubuntu 20.10, 22.04
+- MacOS Monterey
+- Windows 10
 
 ### Shell
-* Bash
-* PowerShell
+
+- Bash
+- PowerShell
 
 ### Terminal
-* Alacritty
-* iTerm2
-* Windows Terminal
+
+- Alacritty
+- iTerm2
+- Windows Terminal
 
 ## Build and Install
 
 ### Dependencies
 
-* go
-* make
+- go
+- make
 
 In addition a [Nerd Font](https://www.nerdfonts.com) needs to be installed on the system for icons to display. The [Cousine Nerd Font](https://www.programmingfonts.org/#cousine) is used in the sample image.
 
+#### Note on the Nerd Font
+
+The Nerd Font must be v3 or later
+
 ### Install
+
 ```bash
 make
 make install
@@ -40,6 +48,7 @@ make install
 ## Configure Shell
 
 ### Bash
+
 Add to `~/.bashrc`
 
 ```bash
@@ -53,6 +62,7 @@ fi
 ```
 
 ### Powershell
+
 Add to `$env:UserProfile\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 
 ```powershell

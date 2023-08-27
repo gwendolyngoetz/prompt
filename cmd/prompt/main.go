@@ -28,13 +28,13 @@ var (
 var (
 	iconSeparator  = ""
 	iconSudo       = ""
-	iconRemote     = ""
+	iconRemote     = "󰍹"
 	iconGit        = ""
 	iconBranch     = ""
 	iconGitChanges = ""
 	iconDirectory  = ""
 	iconPrompt     = ""
-	iconPython     = ""
+	iconPython     = "󰌠"
 )
 
 var Version = "development"
