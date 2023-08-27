@@ -49,10 +49,10 @@ Description: Fancy prompt output
 endef
 
 package-deb:
-	@mkdir -p ./package/prompt_$(VERSION)/tmp/usr/local/bin
+	@mkdir -p ./package/prompt_$(VERSION)/usr/local/bin
 	@mkdir -p ./package/prompt_$(VERSION)/DEBIAN
 
-	@cp ./build/prompt ./package/prompt_$(VERSION)/tmp/usr/local/bin
+	@cp ./build/prompt ./package/prompt_$(VERSION)/usr/local/bin
 	@touch ./package/prompt_$(VERSION)/DEBIAN/control
 	
 	@echo '$(subst $(newline),\n,${CONTROL_FILE_BODY})' > ./package/prompt_$(VERSION)/DEBIAN/control
