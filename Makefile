@@ -1,9 +1,9 @@
 build: clean
 ifeq ($(OS),Windows_NT)
-	@go build -ldflags="-X 'main.Version=v$(VERSION)'" -o .\build\promptwin.exe .\cmd\prompt\main.go
+	@go build -ldflags="-X 'gwendolyngoetz/prompt/cmd.Version=v$(VERSION)'" -o .\build\promptwin.exe .\main.go
 else
-	@go build -ldflags="-X 'main.Version=v$(VERSION)'" -o build/prompt cmd/prompt/main.go
-	@GOOS=windows GOARCH=amd64 go build -ldflags="-X 'main.Version=v$(VERSION)'" -o ./build/promptwin.exe cmd/prompt/main.go
+	@go build -ldflags="-X 'gwendolyngoetz/prompt/cmd.Version=v$(VERSION)'" -o build/prompt ./main.go
+	@GOOS=windows GOARCH=amd64 go build -ldflags="-X 'gwendolyngoetz/prompt/cmd.Version=v$(VERSION)'" -o ./build/promptwin.exe ./main.go
 endif
 	@echo Built prompt
 

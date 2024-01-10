@@ -1,15 +1,12 @@
-package main
+package prompt
 
 import (
-	"flag"
-	"fmt"
 	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
 	p "gwendolyngoetz/prompt/pkg/prompt"
 )
 
 type Config struct {
-	ShowVersion        bool
 	ShowHostname       bool
 	ShowPythonVEnvName bool
 }
@@ -115,26 +112,4 @@ func getChangesIcon() string {
 	}
 
 	return ""
-}
-
-func loadConfig() *Config {
-	config := Config{}
-	flag.BoolVar(&config.ShowVersion, "version", false, "Show version")
-	flag.BoolVar(&config.ShowHostname, "showHostname", false, "Show Hostname")
-	flag.BoolVar(&config.ShowPythonVEnvName, "showPythonVEnvName", false, "Show Python Virtual Env Name")
-	flag.Parse()
-
-	return &config
-}
-
-func main() {
-	config := loadConfig()
-
-	if config.ShowVersion {
-		fmt.Println(Version)
-		return
-	}
-
-	promptString := buildPrompt(config)
-	fmt.Println(promptString)
 }
