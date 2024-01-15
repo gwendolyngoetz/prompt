@@ -1,5 +1,5 @@
 #!/bin/bash
 
 VERSION="-$(date '+%Y%m%d%H%M%S')-dev" make
-./build/prompt --version
+./build/linux/amd64/prompt --version
 #make install
