@@ -1,5 +1,7 @@
 #! /bin/bash
 
+pushd "$(git rev-parse --show-toplevel)" >/dev/null || exit
+
 DEBUG="${1}"
 
 ROOT_FOLDER="/tmp/testing"
