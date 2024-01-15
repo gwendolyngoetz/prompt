@@ -3,11 +3,9 @@ name: Build Only
 on:
   workflow_dispatch: {}
   push:
-    branches: [ master ]
     paths-ignore:
       - '**.md'
   pull_request:
-    branches: [ master ]
     paths-ignore:
       - '**.md'
 env:
