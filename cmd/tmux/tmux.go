@@ -2,6 +2,7 @@ package tmux
 
 import (
 	"fmt"
+	"gwendolyngoetz/prompt/internal/icons"
 	"gwendolyngoetz/prompt/pkg/git"
 	"strings"
 
@@ -21,11 +22,11 @@ var Command = &cobra.Command{
 		message := ""
 
 		if showRepoName == true {
-			message += fmt.Sprintf("%s ", git.GetRepoName())
+			message += fmt.Sprintf("%s %s ", icons.Git, git.GetRepoName())
 		}
 
 		if showGitBranch == true {
-			message += fmt.Sprintf("%s ", git.GetBranchName())
+			message += fmt.Sprintf("%s %s ", icons.Branch, git.GetBranchName())
 		}
 
 		fmt.Printf(strings.TrimSpace(message))
