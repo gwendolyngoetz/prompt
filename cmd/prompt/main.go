@@ -1,6 +1,7 @@
 package prompt
 
 import (
+	"gwendolyngoetz/prompt/internal/icons"
 	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
 	p "gwendolyngoetz/prompt/pkg/prompt"
@@ -20,18 +21,6 @@ var (
 	colorPwd      = "90,85,154"
 	colorBranch   = "98,114,164"
 	colorPython   = "55,118,171"
-)
-
-var (
-	iconSeparator  = ""
-	iconSudo       = ""
-	iconRemote     = "󰍹"
-	iconGit        = ""
-	iconBranch     = ""
-	iconGitChanges = ""
-	iconDirectory  = ""
-	iconPrompt     = ""
-	iconPython     = "󰌠"
 )
 
 var Version = "development"
@@ -57,12 +46,12 @@ func buildPrompt(config *Config) string {
 }
 
 func setOs(prompt *p.PromptBuilder) *p.PromptBuilder {
-	return prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorOs, Icon: computer.GetOsIcon(), Separator: iconSeparator})
+	return prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorOs, Icon: computer.GetOsIcon(), Separator: icons.Separator})
 }
 
 func setSudo(prompt *p.PromptBuilder) {
 	if computer.IsSudo() {
-		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorUserName, Icon: iconSudo, Separator: iconSeparator})
+		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorUserName, Icon: icons.Sudo, Separator: icons.Separator})
 	}
 }
 
@@ -74,20 +63,20 @@ func setRemote(prompt *p.PromptBuilder, config *Config) {
 			hostnameText = computer.GetHostname()
 		}
 
-		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorHostname, Text: hostnameText, Icon: iconRemote, Separator: iconSeparator})
+		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorHostname, Text: hostnameText, Icon: icons.Remote, Separator: icons.Separator})
 	}
 }
 
 func setGit(prompt *p.PromptBuilder) {
 	prompt.
-		AddPart(p.Part{FgColor: colorBlack, BgColor: colorPwd, Text: git.GetRepoName(), Icon: iconGit}).
-		AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: git.GetRepoRelativePath(), Separator: iconSeparator}).
-		AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Text: git.GetBranchName(), Icon: iconBranch}).
-		AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Icon: getChangesIcon(), Separator: iconSeparator})
+		AddPart(p.Part{FgColor: colorBlack, BgColor: colorPwd, Text: git.GetRepoName(), Icon: icons.Git}).
+		AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: git.GetRepoRelativePath(), Separator: icons.Separator}).
+		AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Text: git.GetBranchName(), Icon: icons.Branch}).
+		AddPart(p.Part{FgColor: colorBlack, BgColor: colorBranch, Icon: getChangesIcon(), Separator: icons.Separator})
 }
 
 func setPath(prompt *p.PromptBuilder) {
-	prompt.AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: computer.GetPwd(), Icon: iconDirectory, Separator: iconSeparator})
+	prompt.AddPart(p.Part{FgColor: colorWhite, BgColor: colorPwd, Text: computer.GetPwd(), Icon: icons.Directory, Separator: icons.Separator})
 }
 
 func setPythonEnv(prompt *p.PromptBuilder, config *Config) {
@@ -98,17 +87,17 @@ func setPythonEnv(prompt *p.PromptBuilder, config *Config) {
 			venvName = computer.GetPythonVirtualEnv()
 		}
 
-		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorPython, Text: venvName, Icon: iconPython, Separator: iconSeparator})
+		prompt.AddPart(p.Part{FgColor: colorBlack, BgColor: colorPython, Text: venvName, Icon: icons.Python, Separator: icons.Separator})
 	}
 }
 
 func setPromptIcon(prompt *p.PromptBuilder) {
-	prompt.AddPart(p.Part{Icon: "\n" + iconPrompt})
+	prompt.AddPart(p.Part{Icon: "\n" + icons.Prompt})
 }
 
 func getChangesIcon() string {
 	if git.HasStatusChanges() {
-		return iconGitChanges
+		return icons.GitChanges
 	}
 
 	return ""
