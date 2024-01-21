@@ -20,12 +20,13 @@ var Command = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		message := ""
+		isRepo := git.IsRepo()
 
-		if showRepoName == true {
+		if showRepoName == true && isRepo {
 			message += fmt.Sprintf("%s %s ", icons.Git, git.GetRepoName())
 		}
 
-		if showGitBranch == true {
+		if showGitBranch == true && isRepo {
 			message += fmt.Sprintf("%s %s ", icons.Branch, git.GetBranchName())
 		}
 
