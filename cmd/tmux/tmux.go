@@ -5,43 +5,47 @@ import (
 	"gwendolyngoetz/prompt/internal/icons"
 	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
+	"os"
 	"strings"
+	"text/template"
 
 	"github.com/spf13/cobra"
 )
 
-var (
-	showGitBranch bool
-	showOsIcon    bool
-	showRepoName  bool
-)
+var format string
+
+type TemplateData struct {
+	OsIcon         string
+	RepositoryName string
+	BranchName     string
+}
 
 var Command = &cobra.Command{
 	Use:   "tmux",
 	Short: "A brief description of your command",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		message := ""
-		isRepo := git.IsRepo()
+		formatValue := TemplateData{}
 
-		if showOsIcon == true {
-			message += fmt.Sprintf("%s", computer.GetOsIcon())
+		if strings.Contains(format, ".OsIcon") {
+			formatValue.OsIcon = computer.GetOsIcon()
 		}
 
-		if showRepoName == true && isRepo {
-			message += fmt.Sprintf("%s %s ", icons.Git, git.GetRepoName())
+		if git.IsRepo() {
+			if strings.Contains(format, ".RepositoryName") {
+				formatValue.RepositoryName = fmt.Sprintf("%s %s ", icons.Git, git.GetRepoName())
+			}
+
+			if strings.Contains(format, ".BranchName") {
+				formatValue.BranchName = fmt.Sprintf("%s %s ", icons.Branch, git.GetBranchName())
+			}
 		}
 
-		if showGitBranch == true && isRepo {
-			message += fmt.Sprintf("%s %s ", icons.Branch, git.GetBranchName())
-		}
-
-		fmt.Printf(strings.TrimSpace(message))
+		tmpl, _ := template.New("format-test").Parse(format)
+		_ = tmpl.Execute(os.Stdout, formatValue)
 	},
 }
 
 func init() {
-	Command.Flags().BoolVarP(&showGitBranch, "showGitBranch", "", false, "")
-	Command.Flags().BoolVarP(&showOsIcon, "showOsIcon", "", false, "")
-	Command.Flags().BoolVarP(&showRepoName, "showRepoName", "", false, "")
+	Command.Flags().StringVarP(&format, "format", "", "{{.OsIcon}} {{.RepositoryName}} {{.BranchName}}", "")
 }
