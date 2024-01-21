@@ -3,6 +3,7 @@ package tmux
 import (
 	"fmt"
 	"gwendolyngoetz/prompt/internal/icons"
+	"gwendolyngoetz/prompt/pkg/computer"
 	"gwendolyngoetz/prompt/pkg/git"
 	"strings"
 
@@ -11,6 +12,7 @@ import (
 
 var (
 	showGitBranch bool
+	showOsIcon    bool
 	showRepoName  bool
 )
 
@@ -21,6 +23,10 @@ var Command = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		message := ""
 		isRepo := git.IsRepo()
+
+		if showOsIcon == true {
+			message += fmt.Sprintf("%s", computer.GetOsIcon())
+		}
 
 		if showRepoName == true && isRepo {
 			message += fmt.Sprintf("%s %s ", icons.Git, git.GetRepoName())
@@ -36,5 +42,6 @@ var Command = &cobra.Command{
 
 func init() {
 	Command.Flags().BoolVarP(&showGitBranch, "showGitBranch", "", false, "")
+	Command.Flags().BoolVarP(&showOsIcon, "showOsIcon", "", false, "")
 	Command.Flags().BoolVarP(&showRepoName, "showRepoName", "", false, "")
 }
