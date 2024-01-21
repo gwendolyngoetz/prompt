@@ -3,11 +3,11 @@ build: clean
 	echo Built prompt
 
 clean:
-	@rm -rf build
+	@rm -rf ./build
 
 install: uninstall
 	@[ -d $${HOME}/.local/bin ] || @mkdir -p $${HOME}/.local/bin
-	@cp build/prompt $${HOME}/.local/bin
+	@cp build/linux/amd64/prompt $${HOME}/.local/bin
 	@echo Installed prompt
 
 uninstall:
