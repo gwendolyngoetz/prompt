@@ -9,34 +9,39 @@ import (
 )
 
 type Config struct {
+	HideOsIcon         bool
 	ShowHostname       bool
 	ShowPythonVEnvName bool
+	HideGit            bool
 }
 
 var Version = "development"
 
 func buildPrompt(config *Config) string {
-	builder := p.PromptBuilder{}
+	prompt := p.PromptBuilder{}
 
-	prompt := setOs(&builder)
+	setOs(&prompt, config)
+	setSudo(&prompt)
+	setRemote(&prompt, config)
+	setPythonEnv(&prompt, config)
 
-	setSudo(prompt)
-	setRemote(prompt, config)
-	setPythonEnv(prompt, config)
-
-	if git.IsRepo() {
-		setGit(prompt)
+	if config.HideGit == false && git.IsRepo() {
+		setGit(&prompt)
 	} else {
-		setPath(prompt)
+		setPath(&prompt)
 	}
 
-	setPromptIcon(prompt)
+	setPromptIcon(&prompt)
 
 	return prompt.Build()
 }
 
-func setOs(prompt *p.PromptBuilder) *p.PromptBuilder {
-	return prompt.AddPart(p.Part{FgColor: colors.Black, BgColor: colors.Os, Icon: computer.GetOsIcon(), Separator: icons.Separator})
+func setOs(prompt *p.PromptBuilder, config *Config) {
+	if config.HideOsIcon {
+		return
+	}
+
+	prompt.AddPart(p.Part{FgColor: colors.Black, BgColor: colors.Os, Icon: computer.GetOsIcon(), Separator: icons.Separator})
 }
 
 func setSudo(prompt *p.PromptBuilder) {

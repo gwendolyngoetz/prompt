@@ -22,6 +22,8 @@ var Command = &cobra.Command{
 }
 
 func init() {
+	Command.Flags().BoolVarP(&config.HideOsIcon, "hideOsIcon", "", false, "Hide OS Icon")
 	Command.Flags().BoolVarP(&config.ShowHostname, "showHostname", "", false, "Show Hostname")
 	Command.Flags().BoolVarP(&config.ShowPythonVEnvName, "showPythonVEnvName", "", false, "Show Python Virtual Env Name")
+	Command.Flags().BoolVarP(&config.HideGit, "hideGit", "", false, "Show Git Repo and Branch Names")
 }
