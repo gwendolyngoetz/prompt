@@ -28,7 +28,7 @@ jobs:
       run: "VERSION=${{ env.ver_num }} make package"
 
     - name: Upload a Build Artifact - deb
-      uses: actions/upload-artifact@v4.3.4
+      uses: actions/upload-artifact@v4.3.5
       with:
         name: "prompt_${{ env.ver_num }}.deb"
         path: "package/prompt_${{ env.ver_num }}.deb"
@@ -36,7 +36,7 @@ jobs:
         retention-days: 90
 
     - name: Upload a Build Artifact - zip
-      uses: actions/upload-artifact@v4.3.4
+      uses: actions/upload-artifact@v4.3.5
       with:
         name: "prompt_${{ env.ver_num }}"
         path: "package/prompt_${{ env.ver_num }}.zip"
